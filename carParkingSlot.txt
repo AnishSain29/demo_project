@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class CarParkingSystem {
+    private static int totalSlots = 10; 
+    private static int filledSlots = 0;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        while (true) {
+            displayBoard();
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Park a car (Entry)");
+            System.out.println("2. Remove a car (Exit)");
+            System.out.println("3. Exit system");
+            System.out.print("Your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    parkCar();
+                    break;
+                case 2:
+                    removeCar();
+                    break;
+                case 3:
+                    System.out.println("Exiting system. Thank you!");
+                    sc.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    private static void displayBoard() {
+        System.out.println("\n=== DIGITAL PARKING BOARD ===");
+        System.out.println("Total Slots     : " + totalSlots);
+        System.out.println("Filled Slots    : " + filledSlots);
+        System.out.println("Available Slots : " + (totalSlots - filledSlots));
+        if (filledSlots == totalSlots) {
+            System.out.println("Status          : NO MORE ENTRY AVAILABLE");
+        } else {
+            System.out.println("Status          : SLOTS AVAILABLE");
+        }
+        System.out.println("===================================");
+    }
+
+    private static void parkCar() {
+        if (filledSlots < totalSlots) {
+            filledSlots++;
+            System.out.println("Car parked successfully.");
+        } else {
+            System.out.println("Parking full. Cannot park more cars.");
+        }
+    }
+
+    private static void removeCar() {
+        if (filledSlots > 0) {
+            filledSlots--;
+            System.out.println("Car removed successfully.");
+        } else {
+            System.out.println("No cars to remove.");
+        }
+    }
+}
